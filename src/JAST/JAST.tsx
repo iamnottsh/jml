@@ -5,10 +5,10 @@ import {JASTOutput} from './JASTOutput.ts'
 
 const hover = {py: 1, '&>*': {visibility: 'hidden'}, ':hover': {'&>*': {visibility: 'unset'}}}
 
-function JASTContents({title, elements, children, id, level, main}: JASTOutput & {main?: true}) {
+function JASTContents({title, elements, children, id, level, main}: JASTOutput & {main?: boolean}) {
   const sx: SxProps = useMemo(() => ({opacity: 0.25 + 0.75 / Math.pow(1.5, level), fontSize: `${1.2 + 3.6 / (1 << level)}rem`}), [level])
   return (
-    <Box id={main && id} sx={{breakBefore: 'always'}}>
+    <Box {...main && {id}} sx={{breakBefore: 'always'}}>
       <Box sx={hover}><Link href={`#${id}`}>¶ {title}</Link></Box>
       <Typography sx={sx} fontWeight="bold" textAlign="center" gutterBottom>{title}</Typography>
       {elements?.map((value, index) => <JASTBlock key={index}>{value}</JASTBlock>)}
@@ -18,7 +18,7 @@ function JASTContents({title, elements, children, id, level, main}: JASTOutput &
   )
 }
 
-function JASTTableOfContents({title, children, id, level, main}: JASTOutput & {main?: true}) {
+function JASTTableOfContents({title, children, id, level, main}: JASTOutput & {main?: boolean}) {
   return (
     <>
       <Typography sx={{whiteSpace: 'nowrap'}}>
@@ -33,7 +33,7 @@ function JASTTableOfContents({title, children, id, level, main}: JASTOutput & {m
 const width = 25
 const scroll: SxProps = {height: '100%', overflow: 'auto'}
 
-export default function JAST({article, main}: {article: JASTOutput, main?: true}) {
+export default function JAST({article, main}: {article: JASTOutput, main?: boolean}) {
   return (
     <>
       <Container maxWidth="md" sx={{display: 'none', displayPrint: 'block'}}>

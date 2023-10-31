@@ -1,7 +1,9 @@
+import JASTInlineInput, {JASTInlineInputElement} from './JASTInlineInput.tsx'
 import JASTInlineLink, {JASTInlineLinkElement} from './JASTInlineLink.tsx'
 
 export type JASTInlineElement = string | JASTInlineElement[] |
-  JASTInlineLinkElement
+  JASTInlineLinkElement |
+  JASTInlineInputElement
 
 export interface JASTInlineProps {
   children?: JASTInlineElement
@@ -15,6 +17,8 @@ export default function JASTInline({children}: JASTInlineProps) {
   switch (type) {
     case 'link':
       return <JASTInlineLink {...props}/>
+    case 'input':
+      return <JASTInlineInput {...props}/>
   }
 }
 
