@@ -1,17 +1,19 @@
-import {Box, Container, Link, Typography} from '@mui/material'
+import {Box, Container, Link, SxProps, Typography} from '@mui/material'
+import {useMemo} from 'react'
 import JASTBlock from './JASTBlock.tsx'
 import {JASTOutput} from './JASTOutput.ts'
 
 const hover = {py: 1, '&>*': {visibility: 'hidden'}, ':hover': {'&>*': {visibility: 'unset'}}}
 
 function JASTContents({title, elements, children, id, level, main}: JASTOutput & {main?: true}) {
+  const sx: SxProps = useMemo(() => ({opacity: 0.25 + 0.75 / Math.pow(1.5, level), fontSize: `${1.2 + 3.6 / (1 << level)}rem`}), [level])
   return (
     <Box id={main && id} sx={{breakBefore: 'always'}}>
-      <Box sx={hover}><Link href={`#${id}`}>¶{title}</Link></Box>
-      <Typography fontSize={`${1.2 + 3.6 / (1 << level)}rem`} fontWeight="bold" textAlign="center" gutterBottom>{title}</Typography>
+      <Box sx={hover}><Link href={`#${id}`}>¶ {title}</Link></Box>
+      <Typography sx={sx} fontWeight="bold" textAlign="center" gutterBottom>{title}</Typography>
       {elements?.map((value, index) => <JASTBlock key={index}>{value}</JASTBlock>)}
       {children?.map((value, index) => <JASTContents key={index} {...value} main={main}/>)}
-      <Box sx={hover}><Link href={`#${id}`}>§{title}</Link></Box>
+      <Box sx={hover}><Link href={`#${id}`}>§ {title}</Link></Box>
     </Box>
   )
 }
@@ -19,16 +21,17 @@ function JASTContents({title, elements, children, id, level, main}: JASTOutput &
 function JASTTableOfContents({title, children, id, level, main}: JASTOutput & {main?: true}) {
   return (
     <>
-      <Box pl={level * 1.25}>
-        <Link href={`#${id}`} whiteSpace="nowrap" {...!main && {color: 'inherit', underline: 'none', fontSize: '1.2rem'}}>{title}</Link>
-      </Box>
+      <Typography sx={{whiteSpace: 'nowrap'}}>
+        {Array.from({length: level}).map(() => '· ')}
+        <Link href={`#${id}`} whiteSpace="nowrap" {...!main && {color: 'inherit', underline: 'none'}}>{title}</Link>
+      </Typography>
       {children?.map((value, index) => <JASTTableOfContents key={index} {...value} main={main}/>)}
     </>
   )
 }
 
 const width = 25
-const scroll = {height: '100%', overflow: 'auto'}
+const scroll: SxProps = {height: '100%', overflow: 'auto'}
 
 export default function JAST({article, main}: {article: JASTOutput, main?: true}) {
   return (
