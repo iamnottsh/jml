@@ -22,7 +22,7 @@ function JASTTableOfContents({title, children, id, level, main}: JASTOutput & {m
   return (
     <>
       <Typography sx={{whiteSpace: 'nowrap'}}>
-        {Array.from({length: level}).map(() => '· ')}
+        {'· '.repeat(level)}
         <Link href={`#${id}`} whiteSpace="nowrap" {...!main && {color: 'inherit', underline: 'none'}}>{title}</Link>
       </Typography>
       {children?.map((value, index) => <JASTTableOfContents key={index} {...value} main={main}/>)}

@@ -1,15 +1,20 @@
 import {List, ListItem} from '@mui/material'
-import JASTElement from './JASTElement.ts'
 import JASTBlock, {JASTBlockElement} from './JASTBlock.tsx'
-
-export const JASTBlockListType = 'list'
+import JASTElement from './JASTElement.ts'
 
 export interface JASTBlockListProps {
   children?: JASTBlockElement[]
 }
 
-export type JASTBlockListElement = JASTElement<typeof JASTBlockListType, JASTBlockListProps>
+export type JASTBlockListElement = JASTElement<'list', JASTBlockListProps>
 
 export default function JASTBlockList({children}: JASTBlockListProps) {
-  return <List>{children?.map((value, index) => <ListItem key={index}><JASTBlock>{value}</JASTBlock></ListItem>)}</List>
+  return (
+    <List disablePadding>
+      {children?.map((value, index) =>
+        <ListItem key={index} disablePadding sx={{pl: 2, ':before': {content: `"${index + 1}.\\00a0"`}}}>
+          <JASTBlock>{value}</JASTBlock>
+        </ListItem>)}
+    </List>
+  )
 }

@@ -1,7 +1,7 @@
 import {JASTInput} from '../../JAST/JASTInput.ts'
 
 const 脚本: JASTInput = {
-  title: '意愿维持术的脚本',
+  title: '意愿维持脚本',
   children: [
     {
       title: '维持简单意愿',
