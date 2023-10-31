@@ -1,13 +1,7 @@
-import {JASTInlineAElement} from './JASTInlineA.tsx'
-import JASTInlineB, {JASTInlineBElement, JASTInlineBType} from './JASTInlineB.tsx'
-import JASTInlineI, {JASTInlineIElement, JASTInlineIType} from './JASTInlineI.tsx'
-import JASTInlineS, {JASTInlineSElement, JASTInlineSType} from './JASTInlineS.tsx'
+import JASTInlineLink, {JASTInlineLinkElement} from './JASTInlineLink.tsx'
 
 export type JASTInlineElement = string | JASTInlineElement[] |
-  JASTInlineBElement |
-  JASTInlineIElement |
-  JASTInlineSElement |
-  JASTInlineAElement
+  JASTInlineLinkElement
 
 export interface JASTInlineProps {
   children?: JASTInlineElement
@@ -19,12 +13,8 @@ export default function JASTInline({children}: JASTInlineProps) {
   if (Array.isArray(children)) return children.map((value, index) => <JASTInline key={index}>{value}</JASTInline>)
   const {type, props} = children
   switch (type) {
-    case JASTInlineBType:
-      return <JASTInlineB {...props}/>
-    case JASTInlineIType:
-      return <JASTInlineI {...props}/>
-    case JASTInlineSType:
-      return <JASTInlineS {...props}/>
+    case 'link':
+      return <JASTInlineLink {...props}/>
   }
 }
 

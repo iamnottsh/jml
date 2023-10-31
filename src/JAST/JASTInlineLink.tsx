@@ -3,16 +3,16 @@ import {HTMLAttributeAnchorTarget} from 'react'
 import JASTElement from './JASTElement.ts'
 import JASTInline, {JASTInlineElement} from './JASTInline.tsx'
 
-export const JASTInlineAType = 'a'
+export const JASTInlineLinkType = 'link'
 
-export interface JASTInlineAProps {
+export interface JASTInlineLinkProps {
   children?: JASTInlineElement
   href?: string
   target?: HTMLAttributeAnchorTarget
 }
 
-export type JASTInlineAElement = JASTElement<typeof JASTInlineAType, JASTInlineAProps>
+export type JASTInlineLinkElement = JASTElement<typeof JASTInlineLinkType, JASTInlineLinkProps>
 
-export default function JASTInlineA({children, href, target}: JASTInlineAProps) {
+export default function JASTInlineLink({children, href, target}: JASTInlineLinkProps) {
   return <Link href={href} target={target} rel="noreferrer"><JASTInline>{children}</JASTInline></Link>
 }
