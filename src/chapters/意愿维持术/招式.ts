@@ -1,7 +1,7 @@
 import {JASTInput} from '../../JAST/JASTInput.ts'
 
 const 招式: JASTInput = {
-  title: '招式',
+  title: '意愿维持术的招式',
   children: [
     {
       title: '1 描述',

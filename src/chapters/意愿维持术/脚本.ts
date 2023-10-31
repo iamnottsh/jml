@@ -1,16 +1,16 @@
 import {JASTInput} from '../../JAST/JASTInput.ts'
 
 const 脚本: JASTInput = {
-  title: '脚本',
+  title: '意愿维持术的脚本',
   children: [
     {
-      title: '简单场景',
+      title: '维持简单意愿',
     },
     {
-      title: '普通场景',
+      title: '维持普通意愿',
     },
     {
-      title: '困难场景',
+      title: '维持困难意愿',
     },
   ],
 }

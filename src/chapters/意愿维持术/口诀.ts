@@ -1,7 +1,7 @@
 import {JASTInput} from '../../JAST/JASTInput.ts'
 
 const 口诀: JASTInput = {
-  title: '口诀',
+  title: '意愿维持术的口诀',
   children: [
     {
       title: '能耐比忍耐有效',
