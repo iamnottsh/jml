@@ -3,14 +3,18 @@ import {useMemo} from 'react'
 import JASTBlock from './JASTBlock.tsx'
 import {JASTOutput} from './JASTOutput.ts'
 
+function JASTTitle({title, level}: {title: string, level: number}) {
+  const sx: SxProps = useMemo(() => ({opacity: 0.25 + 0.75 / Math.pow(1.5, level), fontSize: `${1.2 + 3.6 / (1 << level)}rem`}), [level])
+  return <Typography sx={sx} fontWeight="bold" textAlign="center" gutterBottom>{title}</Typography>
+}
+
 const hover = {py: 1, '&>*': {visibility: 'hidden'}, ':hover': {'&>*': {visibility: 'unset'}}}
 
 function JASTContents({title, elements, children, id, level, main}: JASTOutput & {main?: boolean}) {
-  const sx: SxProps = useMemo(() => ({opacity: 0.25 + 0.75 / Math.pow(1.5, level), fontSize: `${1.2 + 3.6 / (1 << level)}rem`}), [level])
   return (
     <Box {...main && {id}} sx={{breakBefore: 'always'}}>
       <Box sx={hover}><Link href={`#${id}`}>¶ {title}</Link></Box>
-      <Typography sx={sx} fontWeight="bold" textAlign="center" gutterBottom>{title}</Typography>
+      <JASTTitle title={title} level={level}/>
       {elements?.map((value, index) => <JASTBlock key={index}>{value}</JASTBlock>)}
       {children?.map((value, index) => <JASTContents key={index} {...value} main={main}/>)}
       <Box sx={hover}><Link href={`#${id}`}>§ {title}</Link></Box>
@@ -37,7 +41,7 @@ export default function JAST({article, main}: {article: JASTOutput, main?: boole
   return (
     <>
       <Container maxWidth="md" sx={{display: 'none', displayPrint: 'block'}}>
-        <Typography fontSize="4.8rem" fontWeight="bold" textAlign="center" gutterBottom>目录</Typography>
+        <JASTTitle title="目录" level={1}/>
         <JASTTableOfContents {...article}/>
         <JASTContents {...article}/>
       </Container>
@@ -49,7 +53,6 @@ export default function JAST({article, main}: {article: JASTOutput, main?: boole
           height="100%"
         >
           <Box sx={scroll}>
-            <Typography fontSize="1.2rem" fontWeight="bold" textAlign="center" gutterBottom>目录</Typography>
             <JASTTableOfContents {...article} main={main}/>
           </Box>
         </Box>

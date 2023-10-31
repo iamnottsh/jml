@@ -26,13 +26,13 @@ const 招式: JASTInput = {
       ],
     },
     {
-      title: '3 提出',
+      title: '3 声明',
       children: [
         {
-          title: '3-a 提出要求',
+          title: '3-a 声明要求',
         },
         {
-          title: '3-b 提出拒绝',
+          title: '3-b 声明拒绝',
         },
       ],
     },
