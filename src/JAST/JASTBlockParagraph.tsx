@@ -11,5 +11,5 @@ export interface JASTBlockParagraphProps {
 export type JASTBlockParagraphElement = JASTElement<typeof JASTBlockParagraphType, JASTBlockParagraphProps>
 
 export default function JASTBlockParagraph({children}: JASTBlockParagraphProps) {
-  return <Typography paragraph gutterBottom><JASTInline>{children}</JASTInline></Typography>
+  return <Typography gutterBottom><JASTInline>{children}</JASTInline></Typography>
 }
