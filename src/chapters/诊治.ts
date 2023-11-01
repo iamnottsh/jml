@@ -1,10 +1,10 @@
 import {JASTBlockElement} from '../JAST/JASTBlock.tsx'
 
 const 戳破: JASTBlockElement = {
-  type: 'paragraph',
+  type: 'input',
   props: {
     children: {
-      type: 'input',
+      type: 'paragraph',
       props: {
         children: '戳破：',
       },
@@ -21,16 +21,16 @@ export default function 诊治(...谎言: string[]): JASTBlockElement {
         props: {
           children: [
             {
-              type: 'paragraph',
+              type: 'input',
               props: {
                 children: {
-                  type: 'input',
+                  type: 'paragraph',
                   props: {
                     children: '谎言：',
-                    value,
-                    disabled: true,
                   },
                 },
+                value,
+                disabled: true,
               },
             },
             戳破,
@@ -41,10 +41,10 @@ export default function 诊治(...谎言: string[]): JASTBlockElement {
         props: {
           children: [
             {
-              type: 'paragraph',
+              type: 'input',
               props: {
                 children: {
-                  type: 'input',
+                  type: 'paragraph',
                   props: {
                     children: '谎言：',
                   },
